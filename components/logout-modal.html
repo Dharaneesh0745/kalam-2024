@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logout Modal</title>
+    <style>
+      /* CSS styles for the logout modal */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+      }
+
+      /* Center the modal content */
+      .modal-content.center {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Close button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      /* Buttons */
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logout Modal -->
+    <div id="logout-modal" class="modal">
+      <div class="modal-content center">
+        <span class="close">&times;</span>
+        <p>Are you sure you want to logout from this website?</p>
+        <button id="confirm-logout">Yes</button>
+        <button id="cancel-logout">No</button>
+      </div>
+    </div>
+
+    <script>
+      // Function to show the modal
+      function showLogoutModal() {
+        var modal = document.getElementById("logout-modal");
+        modal.style.display = "block";
+      }
+
+      // Function to hide the modal
+      function hideLogoutModal() {
+        var modal = document.getElementById("logout-modal");
+        modal.style.display = "none";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var closeButton = document.querySelector(".close");
+
+        // Event listener for close button
+        closeButton.addEventListener("click", hideLogoutModal);
+
+        // Event listener for cancel logout button
+        document
+          .querySelector("#cancel-logout")
+          .addEventListener("click", hideLogoutModal);
+
+        // Event listener for logout button
+        document
+          .querySelector("#confirm-logout")
+          .addEventListener("click", function () {
+            // Add your logout logic here
+            alert("Logging out...");
+            // Redirect or perform logout actions
+          });
+      });
+    </script>
+  </body>
+</html>

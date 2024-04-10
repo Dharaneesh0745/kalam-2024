@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  margin: 0;
+  background-color: #000;
+  color: #eee;
+  font-family: Poppins;
+  font-size: 12px;
+}
+a {
+  text-decoration: none;
+}
+
+/* carousel */
+.carousell {
+  height: 100vh;
+  margin-top: -50px;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+.carousell .listt .itemm {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0 0 0 0;
+}
+.carousell .listt .itemm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousell .listt .itemm .contentt {
+  position: absolute;
+  top: 20%;
+  width: 1140px;
+  max-width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 30%;
+  box-sizing: border-box;
+  color: #fff;
+  text-shadow: 0 5px 10px #0004;
+}
+.carousell .listt .itemm .authorr {
+  font-weight: bold;
+  letter-spacing: 10px;
+}
+.carousell .listt .itemm .titlee,
+.carousell .listt .itemm .topicc {
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1.3em;
+}
+.carousell .listt .itemm .topicc {
+  color: #f1683a;
+}
+.carousell .listt .itemm .buttonss {
+  display: grid;
+  grid-template-columns: repeat(2, 130px);
+  grid-template-rows: 40px;
+  gap: 5px;
+  margin-top: 20px;
+}
+.carousell .listt .itemm .buttonss button {
+  border: none;
+  background-color: #eee;
+  letter-spacing: 3px;
+  font-family: Poppins;
+  font-weight: 500;
+}
+.carousell .listt .itemm .buttonss button:nth-child(2) {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #eee;
+}
+/* thumbail */
+.thumbnaill {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  width: max-content;
+  z-index: 100;
+  display: flex;
+  gap: 20px;
+}
+.thumbnaill .itemm {
+  width: 150px;
+  height: 220px;
+  flex-shrink: 0;
+  position: relative;
+}
+.thumbnaill .itemm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.thumbnaill .itemm .contentt {
+  color: #fff;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+.thumbnaill .itemm .contentt .titlee {
+  font-weight: 500;
+}
+.thumbnaill .itemm .contentt .descriptionn {
+  font-weight: 300;
+}
+/* arrows */
+.arrowss {
+  position: absolute;
+  top: 80%;
+  right: 52%;
+  z-index: 100;
+  width: 300px;
+  max-width: 30%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.arrowss button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee4;
+  border: none;
+  color: #fff;
+  font-family: monospace;
+  font-weight: bold;
+  transition: 0.5s;
+}
+.arrowss button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* animation */
+.carousell .listt .itemm:nth-child(1) {
+  z-index: 1;
+}
+
+/* animation text in first item */
+
+.carousell .listt .itemm:nth-child(1) .contentt .authorr,
+.carousell .listt .itemm:nth-child(1) .contentt .titlee,
+.carousell .listt .itemm:nth-child(1) .contentt .topicc,
+.carousell .listt .itemm:nth-child(1) .contentt .dess,
+.carousell .listt .itemm:nth-child(1) .contentt .buttonss {
+  transform: translateY(50px);
+  filter: blur(20px);
+  opacity: 0;
+  animation: showContent 0.5s 1s linear 1 forwards;
+}
+@keyframes showContent {
+  to {
+    transform: translateY(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+.carousell .listt .itemm:nth-child(1) .contentt .titlee {
+  animation-delay: 1.2s !important;
+}
+.carousell .listt .itemm:nth-child(1) .contentt .topicc {
+  animation-delay: 1.4s !important;
+}
+.carousell .listt .itemm:nth-child(1) .contentt .dess {
+  animation-delay: 1.6s !important;
+}
+.carousell .listt .itemm:nth-child(1) .contentt .buttonss {
+  animation-delay: 1.8s !important;
+}
+/* create animation when next click */
+.carousell.nextt .listt .itemm:nth-child(1) img {
+  width: 150px;
+  height: 220px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  border-radius: 30px;
+  animation: showImage 0.5s linear 1 forwards;
+}
+@keyframes showImage {
+  to {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+.carousell.nextt .thumbnaill .itemm:nth-last-child(1) {
+  overflow: hidden;
+  animation: showThumbnail 0.5s linear 1 forwards;
+}
+.carousell.prevv .listt .itemm img {
+  z-index: 100;
+}
+@keyframes showThumbnail {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+}
+.carousell.nextt .thumbnaill {
+  animation: effectNext 0.5s linear 1 forwards;
+}
+
+@keyframes effectNext {
+  from {
+    transform: translateX(150px);
+  }
+}
+
+/* running time */
+
+.carousell .timee {
+  position: absolute;
+  z-index: 1000;
+  width: 0%;
+  height: 3px;
+  background-color: #f1683a;
+  left: 0;
+  top: 0;
+}
+
+.carousell.nextt .timee,
+.carousell.prevv .timee {
+  animation: runningTime 3s linear 1 forwards;
+}
+@keyframes runningTime {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+/* prev click */
+
+.carousell.prevv .listt .itemm:nth-child(2) {
+  z-index: 2;
+}
+
+.carousell.prevv .listt .itemm:nth-child(2) img {
+  animation: outFrame 0.5s linear 1 forwards;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+@keyframes outFrame {
+  to {
+    width: 150px;
+    height: 220px;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 20px;
+  }
+}
+
+.carousell.prevv .thumbnaill .itemm:nth-child(1) {
+  overflow: hidden;
+  opacity: 0;
+  animation: showThumbnail 0.5s linear 1 forwards;
+}
+.carousell.nextt .arrowss button,
+.carousell.prevv .arrowss button {
+  pointer-events: none;
+}
+.carousell.prevv .listt .itemm:nth-child(2) .contentt .authorr,
+.carousell.prevv .listt .itemm:nth-child(2) .contentt .titlee,
+.carousell.prevv .listt .itemm:nth-child(2) .contentt .topicc,
+.carousell.prevv .listt .itemm:nth-child(2) .contentt .dess,
+.carousell.prevv .listt .itemm:nth-child(2) .contentt .buttonss {
+  animation: contentOut 1.5s linear 1 forwards !important;
+}
+
+@keyframes contentOut {
+  to {
+    transform: translateY(-150px);
+    filter: blur(20px);
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 678px) {
+  .carousell .listt .itemm .contentt {
+    padding-right: 0;
+  }
+  .carousell .listt .itemm .contentt .titlee {
+    font-size: 30px;
+  }
+}
