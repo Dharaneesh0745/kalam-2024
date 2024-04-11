@@ -213,7 +213,7 @@ function goBack() {
 </script>
       <?php } else { ?>
         <!-- <button type="submit" name="add_to_cart" class="cart-btn">add to cart</button> -->
-        <button style="color: red;" class="cart-btn">Registration opens soon</button>
+        <div style="color: red;" class="cart-btn">Registration opens soon</div>
       <?php } ?>
    </form>
 

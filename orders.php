@@ -36,7 +36,7 @@ if(isset($_SESSION['user_id'])){
 
 <div class="heading">
    <h3>orders</h3>
-   <p><a href="html.php">Home</a> <span> / Orders</span></p>
+   <p><a href="html.php">Home</a> <span> / Registrations</span></p>
 </div>
 
 <section class="orders">
@@ -68,7 +68,7 @@ if(isset($_SESSION['user_id'])){
    <?php
       }
       }else{
-         echo '<p class="empty">no orders placed yet!</p>';
+         echo '<p class="empty">no registrations placed yet!</p>';
       }
       }
    ?>
