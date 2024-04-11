@@ -19,7 +19,7 @@ if(isset($_SESSION['user_id'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>orders</title>
+   <title>Registered</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -36,12 +36,12 @@ if(isset($_SESSION['user_id'])){
 
 <div class="heading">
    <h3>orders</h3>
-   <p><a href="html.php">home</a> <span> / orders</span></p>
+   <p><a href="html.php">Home</a> <span> / Orders</span></p>
 </div>
 
 <section class="orders">
 
-   <h1 class="title">your orders</h1>
+   <h1 class="title">your registrations</h1>
 
    <div class="box-container">
 
@@ -59,7 +59,7 @@ if(isset($_SESSION['user_id'])){
       <p>name : <span><?= $fetch_orders['name']; ?></span></p>
       <p>email : <span><?= $fetch_orders['email']; ?></span></p>
       <p>number : <span><?= $fetch_orders['number']; ?></span></p>
-      <p>address : <span><?= $fetch_orders['address']; ?></span></p>
+      <p>college : <span><?= $fetch_orders['address']; ?></span></p>
       <p>payment method : <span><?= $fetch_orders['method']; ?></span></p>
       <p>your orders : <span><?= $fetch_orders['total_products']; ?></span></p>
       <p>total price : <span>₹‎<?= $fetch_orders['total_price']; ?>/-</span></p>

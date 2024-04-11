@@ -55,18 +55,21 @@ include 'components/add_cart.php';
          <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
          <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
          <a href="quick_view.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
-         <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
+         <!-- <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button> -->
          <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+         <div class="cat"><?php echo $fetch_products['category'] ?></div>
          <div class="name"><?= $fetch_products['name']; ?></div>
          <div class="flex">
+         <?php if ($fetch_products['price'] == '') {} else { ?>
             <div class="price"><span>₹‎</span><?= $fetch_products['price']; ?></div>
+         <?php } ?>
             <a class="btn" href="quick_view.php?pid=<?= $fetch_products['id']; ?>">View Event</a>
          </div>
       </form>
       <?php
             }
          }else{
-            echo '<p class="empty">no products added yet!</p>';
+            echo '<p class="empty">no events added yet!</p>';
          }
       ?>
 

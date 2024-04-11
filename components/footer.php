@@ -5,7 +5,7 @@
       <div class="box">
          <img src="images/email-icon.png" alt="">
          <h3>Organizer E-mail</h3>
-         <a href="mailto:dharaneesh0745@gmail.com">dharaneesh0745@gmail.com</a>
+         <a href="mailto:kalam@siet.ac.in">kalam@siet.ac.in</a>
       </div>
 
       <!-- <div class="box">

@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>about</title>
+   <title>About</title>
 
    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 
@@ -36,8 +36,8 @@ if(isset($_SESSION['user_id'])){
 <!-- header section ends -->
 
 <div class="heading">
-   <h3>about us</h3>
-   <p><a href="home.php">home</a> <span> / about</span></p>
+   <h3>about kalam</h3>
+   <p><a href="home.php">Home</a> <span> / About</span></p>
 </div>
 
 <!-- about section starts  -->
@@ -53,7 +53,7 @@ if(isset($_SESSION['user_id'])){
       <div class="content">
          <h3>What is Kalam?</h3>
          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, neque debitis incidunt qui ipsum sed doloremque a molestiae in veritatis ullam similique sunt aliquam dolores dolore? Quasi atque debitis nobis!</p>
-         <a href="menu.html" class="btn">our menu</a>
+         <a href="menu.html" class="btn">our events</a>
       </div>
 
    </div>

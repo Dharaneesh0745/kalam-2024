@@ -14,8 +14,13 @@ if(isset($_POST['add_to_cart'])){
       $price = filter_var($price, FILTER_SANITIZE_STRING);
       $image = $_POST['image'];
       $image = filter_var($image, FILTER_SANITIZE_STRING);
-      $qty = $_POST['qty'];
-      $qty = filter_var($qty, FILTER_SANITIZE_STRING);
+      // $qty = $_POST['qty'];
+      // $qty = filter_var($qty, FILTER_SANITIZE_STRING);
+
+      // Extract checkbox data
+      $group_events = isset($_POST['group_events']) ? $_POST['group_events'] : array(); // Retrieve checkbox data
+      // Convert array to a comma-separated string to store in the database
+      $group_events_options = implode(', ', $group_events);
 
       $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
       $check_cart_numbers->execute([$name, $user_id]);
@@ -23,10 +28,9 @@ if(isset($_POST['add_to_cart'])){
       if($check_cart_numbers->rowCount() > 0){
          $message[] = 'already added to cart!';
       }else{
-         $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
-         $insert_cart->execute([$user_id, $pid, $name, $price, $qty, $image]);
+         $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, group_events_options, price, image) VALUES(?,?,?,?,?,?)");
+         $insert_cart->execute([$user_id, $pid, $name, $group_events_options, $price, $image]);
          $message[] = 'added to cart!';
-         
       }
 
    }

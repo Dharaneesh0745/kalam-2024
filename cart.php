@@ -60,15 +60,15 @@ $grand_total = 0;
 <!-- header section ends -->
 
 <div class="heading">
-   <h3>shopping cart</h3>
-   <p><a href="home.php">home</a> <span> / cart</span></p>
+   <h3>Events Cart</h3>
+   <p><a href="home.php">Home</a> <span> / Cart</span></p>
 </div>
 
 <!-- shopping cart section starts  -->
 
 <section class="products">
 
-   <h1 class="title">your cart</h1>
+   <h1 class="title">Your Cart</h1>
 
    <div class="box-container">
 
@@ -85,12 +85,37 @@ $grand_total = 0;
          <button type="submit" class="fas fa-times" name="delete" onclick="return confirm('delete this item?');"></button>
          <img src="uploaded_img/<?= $fetch_cart['image']; ?>" alt="">
          <div class="name"><?= $fetch_cart['name']; ?></div>
+         <div class="name">
+      <?php
+// Your PHP code to fetch data from the database goes here
+      $group_events_options = $fetch_cart['group_events_options'];
+
+      // Split the rules and regulations by the period '.'
+      $options = explode('. ', $group_events_options);
+      ?>
+      <?php
+if (!empty($fetch_cart['group_events_options'])) {
+    $group_events_options = $fetch_cart['group_events_options'];
+
+    // Split the options by the period '.'
+    $options = explode(', ', $group_events_options);
+    ?>
+    <div class="">
+    <div class="name">Group Events:</div>
+    <ol type="1">
+        <?php foreach ($options as $option): ?>
+            <li style="margin-left: 20px;"><?php echo $option; ?></li>
+        <?php endforeach; ?>
+    </ol>
+    </div>
+<?php } ?>
+      </div>
          <div class="flex">
             <div class="price"><span>₹‎</span><?= $fetch_cart['price']; ?></div>
-            <input type="number" name="qty" class="qty" min="1" max="99" value="<?= $fetch_cart['quantity']; ?>" maxlength="2">
-            <button type="submit" class="btn" name="update_qty">Update Quantity</button>
+            <!-- <input type="number" name="qty" class="qty" min="1" max="99" value="<?= $fetch_cart['quantity']; ?>" maxlength="2"> -->
+            <!-- <button type="submit" class="btn" name="update_qty">Update Quantity</button> -->
          </div>
-         <div class="sub-total"> sub total : <span>₹‎<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div>
+         <!-- <div class="sub-total"> sub total : <span>₹‎<?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span> </div> -->
       </form>
       <?php
                $grand_total += $sub_total;
@@ -103,7 +128,7 @@ $grand_total = 0;
    </div>
 
    <div class="cart-total">
-      <p>cart total : <span>₹‎<?= $grand_total; ?></span></p>
+      <p>Cart Total : <span>₹‎<?= $grand_total; ?></span></p>
       <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
    </div>
 
@@ -111,7 +136,7 @@ $grand_total = 0;
       <form action="" method="post">
          <button type="submit" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>" name="delete_all" onclick="return confirm('delete all from cart?');">delete all</button>
       </form>
-      <a href="menu.php" class="btn">continue shopping</a>
+      <a href="menu.php" class="btn">continue to view events</a>
    </div>
 
 </section>

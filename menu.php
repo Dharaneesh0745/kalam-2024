@@ -20,7 +20,7 @@ include 'components/add_cart.php';
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>menu</title>
+   <title>Events</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -37,7 +37,7 @@ include 'components/add_cart.php';
 
 <div class="heading">
    <h3>our events</h3>
-   <p><a href="home.php">home</a> <span> / menu</span></p>
+   <p><a href="home.php">Home</a> <span> / Events</span></p>
 </div>
 
 <!-- menu section starts  -->
@@ -60,13 +60,16 @@ include 'components/add_cart.php';
          <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
          <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
          <a href="quick_view.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
-         <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
+         <!-- <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button> -->
          <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
          <a href="category.php?category=<?= $fetch_products['category']; ?>" class="cat"><?= $fetch_products['category']; ?></a>
          <div class="name"><?= $fetch_products['name']; ?></div>
          <div class="flex">
+         <?php if ($fetch_products['price'] == '') {} else { ?>
             <div class="price"><span>₹‎</span><?= $fetch_products['price']; ?></div>
-            <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2"">
+         <?php } ?>
+            <!-- <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2"> -->
+            <a class="btn" href="quick_view.php?pid=<?= $fetch_products['id']; ?>">View Event</a>
          </div>
       </form>
       <?php

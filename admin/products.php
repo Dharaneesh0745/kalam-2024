@@ -20,16 +20,29 @@ if(isset($_POST['add_product'])){
    $department = $_POST['department'];
    $department = filter_var($department, FILTER_SANITIZE_STRING);
 
-   $team_event = $_POST['team_event'];
-   $team_event = filter_var($team_event, FILTER_SANITIZE_STRING);
+   if(isset($_POST['team_event'])){
+      $team_event = $_POST['team_event'];
+      $team_event = filter_var($team_event, FILTER_SANITIZE_STRING);
+   } else {
+      // If not set, assign an empty string to $group_events or handle it according to your logic
+      $team_event = ''; // You can change this to whatever default value you need
+   }
 
    $min_members = $_POST['min_members'];
    $min_members = filter_var($min_members, FILTER_SANITIZE_STRING);
    $max_members = $_POST['max_members'];
    $max_members = filter_var($max_members, FILTER_SANITIZE_STRING);
    
-   $group_events = $_POST['group_events'];
-   $group_events = filter_var($group_events, FILTER_SANITIZE_STRING);
+   // $group_events = $_POST['group_events'];
+   // $group_events = filter_var($group_events, FILTER_SANITIZE_STRING);
+   if(isset($_POST['group_events'])){
+      // If set, assign the value to the variable $group_events
+      $group_events = $_POST['group_events'];
+      $group_events = filter_var($group_events, FILTER_SANITIZE_STRING);
+   } else {
+      // If not set, assign an empty string to $group_events or handle it according to your logic
+      $group_events = ''; // You can change this to whatever default value you need
+   }
    $group_events_list = $_POST['group_events_list'];
    $group_events_list = filter_var($group_events_list, FILTER_SANITIZE_STRING);
 
@@ -44,7 +57,10 @@ if(isset($_POST['add_product'])){
    $category = $_POST['category'];
    $category = filter_var($category, FILTER_SANITIZE_STRING);
    $rules = $_POST['rules'];
-   $rules = filter_var($rules, FILTER_SANITIZE_STRING);  
+   $rules = filter_var($rules, FILTER_SANITIZE_STRING);
+
+   $event_options = $_POST['event_options'];
+   $event_options = filter_var($event_options, FILTER_SANITIZE_STRING); 
 
    $staff_co_name = $_POST['staff_co_name'];
    $staff_co_name = filter_var($staff_co_name, FILTER_SANITIZE_STRING); 
@@ -59,6 +75,12 @@ if(isset($_POST['add_product'])){
    $student_co_number_2 = $_POST['student_co_number_2'];
    $student_co_number_2 = filter_var($student_co_number_2, FILTER_SANITIZE_STRING); 
 
+   $joint_event_id = $_POST['joint_event_id'];
+   $joint_event_id = filter_var($joint_event_id, FILTER_SANITIZE_STRING); 
+
+   $single_joint_event_id = $_POST['single_joint_event_id'];
+   $single_joint_event_id = filter_var($single_joint_event_id, FILTER_SANITIZE_STRING); 
+
    $image = $_FILES['image']['name'];
    $image = filter_var($image, FILTER_SANITIZE_STRING);
    $image_size = $_FILES['image']['size'];
@@ -69,15 +91,15 @@ if(isset($_POST['add_product'])){
    $select_products->execute([$name]);
 
    if($select_products->rowCount() > 0){
-      $message[] = 'product name already exists!';
+      $message[] = 'Event already exists!';
    }else{
       if($image_size > 2000000){
          $message[] = 'image size is too large';
       }else{
          move_uploaded_file($image_tmp_name, $image_folder);
 
-         $insert_product = $conn->prepare("INSERT INTO `products`(name, department, group_events, group_events_list, team_event, min_members, max_members, category, caption, description, rules, timing, location, staff_co_name, student_co_name_1, student_co_number_1, student_co_name_2, student_co_number_2, price, image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-         $insert_product->execute([$name, $department, $group_events, $group_events_list, $team_event, $min_members, $max_members, $category, $caption, $description, $rules, $timing, $location, $staff_co_name, $student_co_name_1, $student_co_number_1, $student_co_name_2, $student_co_number_2, $price, $image]);
+         $insert_product = $conn->prepare("INSERT INTO `products`(name, department, single_joint_event_id, joint_event_id, group_events, group_events_list, event_options, team_event, min_members, max_members, category, caption, description, rules, timing, location, staff_co_name, student_co_name_1, student_co_number_1, student_co_name_2, student_co_number_2, price, image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+         $insert_product->execute([$name, $department, $single_joint_event_id, $joint_event_id, $group_events, $group_events_list, $event_options, $team_event, $min_members, $max_members, $category, $caption, $description, $rules, $timing, $location, $staff_co_name, $student_co_name_1, $student_co_number_1, $student_co_name_2, $student_co_number_2, $price, $image]);
 
          $message[] = 'New event added!';
       }
@@ -137,9 +159,25 @@ if(isset($_GET['delete'])){
 
    <form action="" method="POST" enctype="multipart/form-data">
       <h3>Add Events</h3>
-      <input type="text" required placeholder="Enter event name" name="name" maxlength="100" class="box">
-      <input type="number" min="0" max="9999999999" required placeholder="Enter event price" name="price" onkeypress="if(this.value.length == 10) return false;" class="box">
-      <input type="text" required placeholder="Enter Department name" name="department" maxlength="500" class="box">
+      <input type="text" placeholder="Enter event name" name="name" maxlength="100" class="box">
+      <input type="text" min="0" max="9999999999" placeholder="Enter event price" name="price" onkeypress="if(this.value.length == 10) return false;" class="box">
+
+      <select name="department" class="box">
+         <option value="" disabled selected>select department --</option>
+         <option value="Artificial Intelligence & Machine Learning">AIML</option>
+         <option value="Electronics & Communication">ECE</option>
+         <option value="Computer Science & Engineering">CSE</option>
+         <option value="Cyber Security">Cyber Security</option>
+         <option value="Bio-Medical">Bio-Medical</option>
+         <option value="Information Technology">IT</option>
+         <option value="Electrical & Electronics">EEE</option>
+         <option value="Mechanical">MECH</option>
+         <option value="Artificial Intelligence & Data Science">AIDS</option>
+         <option value="Agriculture Engineering">AGRI</option>
+         <option value="Bio-Technology">BT</option>
+         <option value="Civil">CIVIL</option>
+         <option value="Food Technology">FT</option>
+      </select>
 
       <div class="box">
       <span>Team Event: </span><input type="checkbox" name="team_event" id="team_event_checkbox" value="yes" >
@@ -148,11 +186,11 @@ if(isset($_GET['delete'])){
       <div id="range_input" class="hidden">
          <div class="box">
   <label for="min_value">Min Participants:</label>
-  <input type="number" id="min_value" name="min_members" class="box" required>
+  <input type="number" id="min_value" name="min_members" class="box" >
   </div>
   <div class="box">
   <label for="max_value">Max Participants:</label>
-  <input type="number" id="max_value" name="max_members" class="box" required>
+  <input type="number" id="max_value" name="max_members" class="box" >
 </div>
 </div>
 
@@ -176,7 +214,9 @@ if(isset($_GET['delete'])){
       <div id="group_events_input" class="hiddenn">
       <div class="box">
       <label for="group_events_inp">Type events, which are comes under single package</label>
-      <textarea type="text" id="group_events_inp" name="group_events_list" class="box" required></textarea>
+      <textarea type="text" id="group_events_inp" name="group_events_list" class="box" ></textarea>
+      <input type="number" placeholder="event options (any 2 or 3 like that)" class="box" name="event_options" >
+      <input type="text" placeholder="Joint Event ID" name="joint_event_id" maxlength="100" class="box">
       </div>
       </div>
 
@@ -193,27 +233,29 @@ if(isset($_GET['delete'])){
       });
       </script>
 
+      <input type="text" placeholder="Enter single joint event ID" name="single_joint_event_id" maxlength="100" class="box">
 
-      <textarea type="text" required placeholder="Enter event caption" name="caption" maxlength="1000" class="box"></textarea>
-      <textarea type="text" required placeholder="Enter event description" name="description" maxlength="5000" class="box"></textarea>
-      <textarea type="text" required placeholder="Enter event rules" name="rules" maxlength="5000" class="box"></textarea>
-      <input type="text" required placeholder="Enter event timing" name="timing" maxlength="100" class="box">
-      <input type="text" required placeholder="Enter event location" name="location" maxlength="100" class="box">
+      <textarea type="text" placeholder="Enter event caption" name="caption" maxlength="1000" class="box"></textarea>
+      <textarea type="text" placeholder="Enter event description" name="description" maxlength="5000" class="box"></textarea>
+      <textarea type="text" placeholder="Enter event rules" name="rules" maxlength="5000" class="box"></textarea>
+      <input type="text" placeholder="Enter event timing" name="timing" maxlength="100" class="box">
+      <input type="text" placeholder="Enter event location" name="location" maxlength="100" class="box">
 
-      <input type="text" required placeholder="Enter event staff coordinator" name="staff_co_name" maxlength="1000" class="box">
-      <!-- <input type="number" required placeholder="Enter event staff coordinator number" name="staff_co_number" maxlength="100" class="box"> -->
-      <input type="text" required placeholder="Enter event student coordinator - 1" name="student_co_name_1" maxlength="1000" class="box">
+      <input type="text" placeholder="Enter event staff coordinator" name="staff_co_name" maxlength="1000" class="box">
+      <!-- <input type="number" placeholder="Enter event staff coordinator number" name="staff_co_number" maxlength="100" class="box"> -->
+      <input type="text" placeholder="Enter event student coordinator - 1" name="student_co_name_1" maxlength="1000" class="box">
       <input type="number" placeholder="Enter event student coordinator number - 1" name="student_co_number_1" maxlength="100" class="box">
 
-      <input type="text" required placeholder="Enter event student coordinator - 2" name="student_co_name_2" maxlength="1000" class="box">
+      <input type="text" placeholder="Enter event student coordinator - 2" name="student_co_name_2" maxlength="1000" class="box">
       <input type="number" placeholder="Enter event student coordinator number - 2" name="student_co_number_2" maxlength="100" class="box">
-      <select name="category" class="box" required>
+      <select name="category" class="box">
          <option value="" disabled selected>select category --</option>
          <option value="Technical Event">Technical Event</option>
          <option value="Non - Technical Event">Non - Technical Event</option>
          <option value="Cultural Events">Cultural Event</option>
+         <option value="Package Events">Package Event</option>
       </select>
-      <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png, image/webp" required>
+      <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png, image/webp">
       <input type="submit" value="add product" name="add_product" class="btn">
    </form>
 
@@ -248,7 +290,7 @@ if(isset($_GET['delete'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no products added yet!</p>';
+         echo '<p class="empty">No events added yet!</p>';
       }
    ?>
 
