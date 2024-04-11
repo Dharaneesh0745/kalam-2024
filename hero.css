@@ -12,12 +12,43 @@ a {
 
 /* carousel */
 .carousell {
-  height: 100vh;
+  height: 1200px;
   margin-top: -50px;
   width: 100vw;
   overflow: hidden;
   position: relative;
 }
+
+/* @media screen and (max-width: 678px) {
+  .carousell {
+    height: 900px;
+  }
+} */
+
+/* @media only screen and (max-width: 768px) {
+  .carousell .listt .itemm img {
+    width: 100%;
+    height: auto; /* To maintain aspect ratio
+  } 
+} */
+/* For small screens, display image as a small card */
+/* @media only screen and (max-width: 768px) {
+  .carousell .listt .itemm .image-container {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+  }
+
+  .carousell .listt .itemm img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; 
+  }
+  .carousell .listt .itemm .contentt {
+    margin-top: 20px; 
+  }
+} */
+
 .carousell .listt .itemm {
   width: 100%;
   height: 100%;

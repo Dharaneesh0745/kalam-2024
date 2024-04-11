@@ -79,7 +79,8 @@ $grand_total = 0;
          if($select_cart->rowCount() > 0){
             while($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)){
       ?>
-      <form action="" method="post" class="box">
+      <form action="checkout.php" method="post" class="box">
+      <input type="hidden" name="group_events_options[]" value="<?= $fetch_cart['group_events_options']; ?>">
          <input type="hidden" name="cart_id" value="<?= $fetch_cart['id']; ?>">
          <a href="quick_view.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
          <button type="submit" class="fas fa-times" name="delete" onclick="return confirm('delete this item?');"></button>

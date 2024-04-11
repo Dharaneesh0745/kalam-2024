@@ -52,7 +52,7 @@ if(isset($_SESSION['user_id'])){
 
       <div class="content">
          <h3>What is Kalam?</h3>
-         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, neque debitis incidunt qui ipsum sed doloremque a molestiae in veritatis ullam similique sunt aliquam dolores dolore? Quasi atque debitis nobis!</p>
+         <p>Kalam, an annual college meet, fosters intercultural understanding through workshops, competitions, and entertainment. It provides a platform for students to exchange ideas, showcase talents, and collaborate in an inclusive environment. Kalam empowers students and ignites their passions.</p>
          <a href="menu.html" class="btn">our events</a>
       </div>
 

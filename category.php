@@ -58,7 +58,10 @@ include 'components/add_cart.php';
          <!-- <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button> -->
          <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
          <div class="cat"><?php echo $fetch_products['category'] ?></div>
-         <div class="name"><?= $fetch_products['name']; ?></div>
+         <div style="font-size: 3rem; color: #5700FF; font-weight: bold;" class="name"><?= $fetch_products['name']; ?></div>
+         <div class="flex">
+         <div class="name">Dept: <span class="cat"><?php echo $fetch_products['department'] ?></span></div>
+            </div>
          <div class="flex">
          <?php if ($fetch_products['price'] == '') {} else { ?>
             <div class="price"><span>₹‎</span><?= $fetch_products['price']; ?></div>

@@ -23,6 +23,10 @@ if(isset($_POST['submit'])){
    $total_products = $_POST['total_products'];
    $total_price = $_POST['total_price'];
 
+   $group_events_options = $_POST['group_events_options'];
+   // Convert the array to a string
+   $group_events_options_str = is_array($group_events_options) ? implode(', ', $group_events_options) : '';
+
    function generateRandomString($length = 5) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -54,10 +58,14 @@ if(isset($_POST['submit'])){
     $message[] = 'Please add your college details!';
  }else{
     // Create a new order in the database
-    $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, order_id) VALUES(?,?,?,?,?,?,?,?,?)");
-    $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $total_price, $order_id]);
+    $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, group_events_options_str, number, email, method, address, total_products, total_price, order_id) VALUES(?,?,?,?,?,?,?,?,?,?)");
+    $insert_order->execute([$user_id, $name, $group_events_options_str, $number, $email, $method, $address, $total_products, $total_price, $order_id]);
 
-    // Clear the user's cart after placing the order
+    if($insert_order->errorCode() !== '00000') {
+      $errorInfo = $insert_order->errorInfo();
+      echo "Error inserting data into database: " . $errorInfo[2];
+  }
+   //  Clear the user's cart after placing the order
     $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
     $delete_cart->execute([$user_id]);
 
@@ -171,7 +179,7 @@ if (isset($_GET['payment_status']) && $_GET['payment_status'] == 'success') {
    </script> -->
 
 </head>
-<body>
+ <body>
    
 <!-- header section starts  -->
 <?php include 'components/user_header.php'; ?>
@@ -195,13 +203,35 @@ if (isset($_GET['payment_status']) && $_GET['payment_status'] == 'success') {
          $cart_items[] = '';
          $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
          $select_cart->execute([$user_id]);
-         if($select_cart->rowCount() > 0){
-            while($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)){
+         if ($select_cart->rowCount() > 0) {
+            while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
                $cart_items[] = $fetch_cart['name'].' ('.$fetch_cart['price'].' x '. $fetch_cart['quantity'].') - ';
                $total_products = implode($cart_items);
                $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
       ?>
-      <p><span class="name"><?= $fetch_cart['name']; ?></span><span class="price">₹‎<?= $fetch_cart['price']; ?> x <?= $fetch_cart['quantity']; ?></span></p>
+      <p>
+    <span class="name"><?= $fetch_cart['name']; ?></span>
+    <span class="price">₹‎<?= $fetch_cart['price']; ?> x <?= $fetch_cart['quantity']; ?></span>
+    <!-- Display group_events_options -->
+    <?php if ($fetch_cart['group_events_options'] == '') {} else { ?>
+      
+    <ol style="color: #D6D2D1; padding-left: 15px">
+    <?php
+    $group_events_options = $fetch_cart['group_events_options'];
+
+    // Split the options by the period '.'
+    $options = explode(', ', $group_events_options);
+    foreach ($options as $option):
+    ?>
+    
+    <li><?php echo $option; ?></li>
+    
+    <?php endforeach; ?>
+</ol>
+</span>
+<?php } ?>
+</p>
+
       <?php
             }
          }else{
@@ -218,6 +248,9 @@ if (isset($_GET['payment_status']) && $_GET['payment_status'] == 'success') {
    <input type="hidden" name="number" value="<?= $fetch_profile['number'] ?>">
    <input type="hidden" name="email" value="<?= $fetch_profile['email'] ?>">
    <input type="hidden" name="address" value="<?= $fetch_profile['address'] ?>">
+
+   <!-- Modify the input to store the array -->
+   <input type="hidden" name="group_events_options[]" value="<?= $fetch_cart['group_events_options'] ?>">
 
    <div class="user-info">
       <h3>Your Info</h3>

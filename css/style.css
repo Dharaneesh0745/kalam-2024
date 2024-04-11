@@ -5,7 +5,7 @@
   --red: #e74c3c;
   --white: #fff;
   --black: #222;
-  --light-color: grey;
+  --light-color: gray;
   --border: 0.2rem solid var(--black);
 }
 
@@ -20,9 +20,11 @@
 }
 
 body {
-  /* background: linear-gradient(135deg, #bbdbff, #4ea0ff, #004390); */
-  background: #fff;
-
+  /* background: linear-gradient(135deg, #c6ffc3, #80ff7a, #0be500); */
+  background-image: url("https://static.vecteezy.com/system/resources/thumbnails/000/558/380/small/vector-apr-2018-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: #fff; */
   /* Add other styles */
   color: var(--black);
   /* background-color: transparent; */
@@ -190,7 +192,10 @@ section {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--white);
+  /* background-color: var(--white); */
+  background-image: url("https://wallpapers.com/images/hd/green-smoke-background-kzfqgjljitv5jhur.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   color: var(--white) !important;
   border-bottom: var(--border);
 }

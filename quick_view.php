@@ -99,7 +99,7 @@ include 'components/add_cart.php';
       <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
       <a href="category.php?category=<?= $fetch_products['category']; ?>" class="cat"><?= $fetch_products['category']; ?></a>
-      <div class="name"><?= $fetch_products['name']; ?></div>
+      <div style="font-size: 3rem; color: #5700FF; font-weight: bold;" class="name"><?= $fetch_products['name']; ?></div>
       <div class="flex">
       <?php 
       $jointPID = $fetch_products['single_joint_event_id'];
@@ -112,6 +112,7 @@ include 'components/add_cart.php';
 
       </div>
 
+      <?php if ($fetch_products['category'] == 'Package Events') {} else { ?>
         <div class="flex">
         <div class="name">Participant Type: </div>
       <?php
@@ -124,6 +125,11 @@ include 'components/add_cart.php';
       
       ?>
         </div>
+        <?php } ?>
+
+        <div class="flex">
+         <div class="name">Dept: <span class="cat"><?php echo $fetch_products['department'] ?></span></div>
+            </div>
 
       <div class="flex">
          
@@ -134,6 +140,20 @@ include 'components/add_cart.php';
          <div class="name">Timing: <p class="cat"><?= $fetch_products['timing']; ?></p></div>
       </div>
       <?php } ?>
+
+      <?php if ($fetch_products['category'] == 'Package Events') {} else { ?>
+      <div class="flex">
+        <div class="name">Staff Coordinator: <p class="cat"><?php echo $fetch_products['staff_co_name'] ?></p></div>
+      </div>
+
+      <div class="flex">
+        <div class="name">Student Coordinator - 1: <p class="cat"><?php echo $fetch_products['student_co_name_1'] ?> - <a href="tel:<?php echo $fetch_products['student_co_number_1'] ?>"><?php echo $fetch_products['student_co_number_1'] ?></a></p></div>
+      </div>
+      <div class="flex">
+        <div class="name">Student Coordinator - 2: <p class="cat"><?php echo $fetch_products['student_co_name_2'] ?> - <a href="tel:<?php echo $fetch_products['student_co_number_2'] ?>"><?php echo $fetch_products['student_co_number_2'] ?></a></p></div>
+      </div>
+      <?php } ?>
+
       <div class="">
          <div class="name">Description:</div>
          <div class="flex"><p class="cat"><?= $fetch_products['description']; ?></p></div>
@@ -147,11 +167,11 @@ include 'components/add_cart.php';
       $points = explode('. ', $rulesAndRegulations);
       ?>
         <?php if ($fetch_products['category'] == 'Package Events') {} else { ?>
-         <div class="name">Rules:</div>
+         <div class="name">Rules & Regulations:</div>
          <!-- <div class="flex"><p class="cat"><?= $fetch_products['rules']; ?></p></div> -->
          <ol type="1">
       <?php foreach ($points as $point): ?>
-         <li style="margin-left: 20px;"><?php echo $point; ?></li>
+         <li class="cat" style="margin-left: 20px;"><?php echo $point; ?></li>
       <?php endforeach; ?>
    </ol>
       <?php } ?>
@@ -193,7 +213,7 @@ function goBack() {
 </script>
       <?php } else { ?>
         <!-- <button type="submit" name="add_to_cart" class="cart-btn">add to cart</button> -->
-        <button class="cart-btn">Registration opens soon</button>
+        <button style="color: red;" class="cart-btn">Registration opens soon</button>
       <?php } ?>
    </form>
 
