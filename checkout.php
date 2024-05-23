@@ -75,8 +75,8 @@ if(isset($_POST['submit'])){
 
    // PhonePe API integration code
 
-   $merchantId = 'PGTESTPAYUAT'; // sandbox or test merchantId
-   $apiKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"; // sandbox or test APIKEY
+   $merchantId = ''; // sandbox or test merchantId
+   $apiKey = ""; // sandbox or test APIKEY
    $redirectUrl = 'home.php';
 
    $order_id = uniqid();
